@@ -1,0 +1,18 @@
+{
+    "extends": ["airbnb", "prettier"],
+    "plugins": ["prettier"],
+    "overrides": [
+        {
+        "files": [ "src/**/*.js" ],
+        "rules": {
+            "quotes": [ 2, "single" ]
+        }
+        }
+    ],
+    "globals": {
+        "_": "readonly",
+        "document": true,
+        "window": true
+    }
+
+}
