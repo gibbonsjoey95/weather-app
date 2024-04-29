@@ -1,4 +1,6 @@
-const renderSearchedCityData = (data, container) => {
+import fetchCityData from './fetch-city-data';
+
+const renderSearchedCitiesData = (data, container) => {
   if (data) {
     data.forEach((city, index) => {
       let cityContainer = container.querySelector(`#city-${index}`);
@@ -7,6 +9,7 @@ const renderSearchedCityData = (data, container) => {
         const cityNameElement = document.createElement('h1');
         const cityRegionElement = document.createElement('h3');
         const cityCountryElement = document.createElement('p');
+        const cityUrl = city.url;
 
         cityNameElement.textContent = city.name;
         cityRegionElement.textContent = city.region;
@@ -17,6 +20,11 @@ const renderSearchedCityData = (data, container) => {
         cityContainer.appendChild(cityNameElement);
         cityContainer.appendChild(cityRegionElement);
         cityContainer.appendChild(cityCountryElement);
+
+        cityContainer.addEventListener('click', () => {
+          fetchCityData(cityUrl);
+        });
+
         container.appendChild(cityContainer);
       }
     });
@@ -27,4 +35,4 @@ const renderSearchedCityData = (data, container) => {
   }
 };
 
-export default renderSearchedCityData;
+export default renderSearchedCitiesData;

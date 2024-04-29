@@ -1,4 +1,4 @@
-async function fetchData(cityName) {
+async function fetchSearchedCitiesData(cityName) {
   try {
     const response = await fetch(
       `https://api.weatherapi.com/v1/search.json?key=ad84ea924ded499592915023242304&q=${cityName}`,
@@ -19,4 +19,4 @@ async function fetchData(cityName) {
   }
 }
 
-export default fetchData;
+export default fetchSearchedCitiesData;

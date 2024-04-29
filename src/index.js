@@ -1,7 +1,7 @@
 import './styles.css';
-import fetchData from './fetch-data';
-import processData from './process-data';
-import renderSearchedCityData from './render-searched-city-data';
+import fetchSearchedCitiesData from './fetch-searched-cities-data';
+import processSearchedCitiesData from './process-searched-cities-data';
+import renderSearchedCitiesData from './render-searched-cities-data';
 
 const content = document.querySelector('#content');
 const searchedCityContainer = document.querySelector('#searchedCityContainer');
@@ -24,10 +24,10 @@ function component() {
 
     searchedCityContainer.textContent = '';
 
-    fetchData(cityName)
-      .then(processData())
+    fetchSearchedCitiesData(cityName)
+      .then(processSearchedCitiesData())
       .then((data) => {
-        renderSearchedCityData(data, searchedCityContainer);
+        renderSearchedCitiesData(data, searchedCityContainer);
       });
   });
 

@@ -1,6 +1,6 @@
-import fetchData from './fetch-data';
+import fetchData from './fetch-searched-cities-data';
 
-async function processData() {
+async function processSearchedCitiesData() {
   try {
     const data = await fetchData();
 
@@ -18,4 +18,4 @@ async function processData() {
   }
 }
 
-export default processData;
+export default processSearchedCitiesData;
