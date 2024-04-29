@@ -1,6 +1,7 @@
 import './styles.css';
 import fetchData from './fetch-data';
 import processData from './process-data';
+import renderSearchedCityData from './render-searched-city-data';
 
 const content = document.querySelector('#content');
 const searchedCityContainer = document.querySelector('#searchedCityContainer');
@@ -26,24 +27,7 @@ function component() {
     fetchData(cityName)
       .then(processData())
       .then((data) => {
-        if (data) {
-          data.forEach((city, index) => {
-            let cityNameElement = searchedCityContainer.querySelector(
-              `#city-${index}`,
-            );
-            if (!cityNameElement) {
-              cityNameElement = document.createElement('h1');
-              cityNameElement.id = `city-${index}`;
-              searchedCityContainer.appendChild(cityNameElement);
-            }
-
-            cityNameElement.textContent = city.name;
-          });
-        } else {
-          const errorMsg = document.createElement('h1');
-          errorMsg.textContent = 'Failed to fetch weather data.';
-          searchedCityContainer.appendChild(errorMsg);
-        }
+        renderSearchedCityData(data, searchedCityContainer);
       });
   });
 
