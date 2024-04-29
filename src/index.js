@@ -11,7 +11,19 @@ const getCityWeatherDataButton = document.querySelector(
 
 function component() {
   getCityWeatherDataButton.addEventListener('click', () => {
-    fetchData(cityNameInput.value)
+    const cityName = cityNameInput.value.trim();
+
+    if (!cityName) {
+      const errorMsg = document.createElement('h1');
+      errorMsg.textContent = 'Can not leave city name field blank';
+      searchedCityContainer.textContent = '';
+      searchedCityContainer.appendChild(errorMsg);
+      return;
+    }
+
+    searchedCityContainer.textContent = '';
+
+    fetchData(cityName)
       .then(processData())
       .then((data) => {
         if (data) {
@@ -39,5 +51,3 @@ function component() {
 }
 
 document.body.appendChild(component());
-
-// Instead of clearing the container every time, consider updating the existing elements
