@@ -1,38 +1,43 @@
 import fetchCityData from './fetch-city-data';
+import processSearchedCitiesData from './process-searched-cities-data';
+import renderCityData from './render-city-data';
 
 const renderSearchedCitiesData = (data, container) => {
-  if (data) {
-    data.forEach((city, index) => {
-      let cityContainer = container.querySelector(`#city-${index}`);
+  const processedData = processSearchedCitiesData(data);
 
-      if (!cityContainer) {
-        const cityNameElement = document.createElement('h1');
-        const cityRegionElement = document.createElement('h3');
-        const cityCountryElement = document.createElement('p');
-        const cityUrl = city.url;
+  processedData.forEach((city, index) => {
+    let cityContainer = container.querySelector(`#city-${index}`);
 
-        cityNameElement.textContent = city.name;
-        cityRegionElement.textContent = city.region;
-        cityCountryElement.textContent = city.country;
+    if (!cityContainer) {
+      cityContainer = document.createElement('div');
+      cityContainer.id = `city-${index}`;
 
-        cityContainer = document.createElement('div');
-        cityContainer.id = `city-${index}`;
-        cityContainer.appendChild(cityNameElement);
-        cityContainer.appendChild(cityRegionElement);
-        cityContainer.appendChild(cityCountryElement);
+      const cityNameElement = document.createElement('h1');
+      cityNameElement.textContent = city.name;
+      cityContainer.appendChild(cityNameElement);
 
-        cityContainer.addEventListener('click', () => {
-          fetchCityData(cityUrl);
-        });
+      const cityRegionElement = document.createElement('h3');
+      cityRegionElement.textContent = city.region;
+      cityContainer.appendChild(cityRegionElement);
 
-        container.appendChild(cityContainer);
-      }
-    });
-  } else {
-    const errorMsg = document.createElement('h1');
-    errorMsg.textContent = 'Failed to fetch weather data.';
-    container.appendChild(errorMsg);
-  }
+      const cityCountryElement = document.createElement('p');
+      cityCountryElement.textContent = city.country;
+      cityContainer.appendChild(cityCountryElement);
+
+      const cityUrl = document.createElement('p');
+      cityUrl.textContent = city.url;
+      cityContainer.appendChild(cityUrl);
+
+      cityContainer.addEventListener('click', () => {
+        fetchCityData(city.url)
+          .then((d) => renderCityData(d))
+          // eslint-disable-next-line no-console
+          .catch((error) => console.error('Error fetching data:', error));
+      });
+
+      container.appendChild(cityContainer);
+    }
+  });
 };
 
 export default renderSearchedCitiesData;

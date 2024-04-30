@@ -1,6 +1,5 @@
 import './styles.css';
 import fetchSearchedCitiesData from './fetch-searched-cities-data';
-import processSearchedCitiesData from './process-searched-cities-data';
 import renderSearchedCitiesData from './render-searched-cities-data';
 
 const content = document.querySelector('#content');
@@ -24,11 +23,9 @@ function component() {
 
     searchedCityContainer.textContent = '';
 
-    fetchSearchedCitiesData(cityName)
-      .then(processSearchedCitiesData())
-      .then((data) => {
-        renderSearchedCitiesData(data, searchedCityContainer);
-      });
+    fetchSearchedCitiesData(cityName).then((data) => {
+      renderSearchedCitiesData(data, searchedCityContainer);
+    });
   });
 
   return content;

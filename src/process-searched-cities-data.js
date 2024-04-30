@@ -1,21 +1,11 @@
-import fetchData from './fetch-searched-cities-data';
+const processSearchedCitiesData = (data) => {
+  const cityArray = data.map((city) => {
+    const { name, region, country, url } = city;
 
-async function processSearchedCitiesData() {
-  try {
-    const data = await fetchData();
+    return { name, region, country, url };
+  });
 
-    const cityArray = data.map((city) => {
-      const { name, region, country, url } = city;
-
-      return { name, region, country, url };
-    });
-
-    return cityArray;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error while processing data:', error);
-    throw error;
-  }
-}
+  return cityArray;
+};
 
 export default processSearchedCitiesData;
