@@ -29,8 +29,12 @@ const renderSearchedCitiesData = (data, container) => {
       cityContainer.appendChild(cityUrl);
 
       cityContainer.addEventListener('click', () => {
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
         fetchCityData(city.url)
-          .then((d) => renderCityData(d))
+          .then((d) => renderCityData(d, container))
           // eslint-disable-next-line no-console
           .catch((error) => console.error('Error fetching data:', error));
       });
