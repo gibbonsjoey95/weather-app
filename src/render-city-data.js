@@ -4,6 +4,7 @@ const renderCityData = (data, container) => {
   const processedCityData = processesCityData(data);
 
   const cityWeatherContainer = document.createElement('div');
+  cityWeatherContainer.classList.add('city-weather-container');
 
   const cityName = document.createElement('h1');
   cityName.textContent = processedCityData.name;

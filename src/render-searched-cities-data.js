@@ -11,6 +11,7 @@ const renderSearchedCitiesData = (data, container) => {
     if (!cityContainer) {
       cityContainer = document.createElement('div');
       cityContainer.id = `city-${index}`;
+      cityContainer.classList.add('city-container');
 
       const cityNameElement = document.createElement('h1');
       cityNameElement.textContent = city.name;
@@ -23,10 +24,6 @@ const renderSearchedCitiesData = (data, container) => {
       const cityCountryElement = document.createElement('p');
       cityCountryElement.textContent = city.country;
       cityContainer.appendChild(cityCountryElement);
-
-      const cityUrl = document.createElement('p');
-      cityUrl.textContent = city.url;
-      cityContainer.appendChild(cityUrl);
 
       cityContainer.addEventListener('click', () => {
         while (container.firstChild) {
